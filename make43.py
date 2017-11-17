@@ -3,7 +3,7 @@ Creates DHCP option 43 hex string from one or many WLC IP addreses
 Written in Python 2, now broken in Python 3
 '''
 import sys
-   
+
 def end():
     print ('Usage: make43.py <WLC_IP_1> <WLC_IP_2> <WLC_IP_3> <WLC_IP_n>')
     print ('Space separated IPv4 Wireless LAN Controller addreses (x.x.x.x)')
@@ -21,12 +21,12 @@ def check_and_convert(octet_split):
         if len(octet_split[octet]) == 1:
                octet_split[octet] = '0' + octet_split[octet]
         var_value_list.append(octet_split[octet])
- 
+
 if len(sys.argv) <= 1:
     end()
-    
+
 ip_addresses, var_value_list = sys.argv[1:], []
-for ip_address in xrange(0, len(ip_addresses)):
+for ip_address in range(0, len(ip_addresses)):
     ip_address_split = ip_addresses[ip_address].split('.')
     check_and_convert(ip_address_split)
 
