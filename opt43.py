@@ -2,7 +2,9 @@
 DHCP Option 43 script v1.0
 Encodes & decodes Cisco option 43 HEX strings
 
-2017 - Michal Kowalik - netpacket.net
+2017 - Michal Kowalik
+
+www.netpacket.net
 '''
 import sys
 
