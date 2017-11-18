@@ -2,7 +2,7 @@
 Adds Cisco IOS ' | b'  style pipe functionality to Windows output
 
 Usage sh.py <windows_command> <start_string> <number_of_output_lines>
-Runs command and displays output only from matching string
+Runs command and displays output starting from matching string
 Output length can be specified as additional parameter, default is 20 lines
 
 netpacket.net
