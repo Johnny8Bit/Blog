@@ -1,12 +1,13 @@
 '''
-DHCP Option 43 script v1.0
-Encodes & decodes Cisco option 43 HEX strings
-
-2017 - Michal Kowalik
+Encodes & decodes DHCP option 43 HEX strings used for Cisco APs
 
 www.netpacket.net
 '''
 import sys
+
+__author__ = 'Michal Kowalik'
+__version__= '1.0'
+__status__ = 'Prototype'
 
 def end():
     print('\n** Encode option 43 HEX string')
@@ -18,6 +19,8 @@ def end():
     sys.exit()
 
 def encode():
+    """From list of IP addresses returns encoded DHCP option 43 HEX string
+    """
     var_value_list = []
     for wlc_ip in sys.argv[1:]:
         wlc_ip_split = wlc_ip.split('.')
@@ -34,6 +37,8 @@ def encode():
     print('\noption 43 hex ' + var_type + var_len + var_value)
 
 def decode():
+    """From option 43 HEX string returns number of WLCs and their IP addresses
+    """
     wlc_count = int(sys.argv[1][2:4], base=16)
     hex_string = sys.argv[1][4:]
     if wlc_count % 4 != 0: end()
