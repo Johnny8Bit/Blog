@@ -11,7 +11,7 @@ netpacket.net
 import subprocess, time, re, os
 
 __author__ = 'Michal Kowalik'
-__credits__ = 'Bruce McMurdo'
+__credits__= 'Bruce McMurdo'
 __version__= '1.1'
 __status__ = 'Prototype'
 
