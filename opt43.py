@@ -1,7 +1,7 @@
 '''
 Encodes & decodes DHCP option 43 HEX strings used for Cisco APs
 
-www.netpacket.net
+netpacket.net
 '''
 import sys
 

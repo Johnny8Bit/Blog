@@ -4,6 +4,8 @@ Removes leading whitespace and empty lines from text file
 Usage: lstrip.py <filename.txt>
 Overwrites existing file
 Useful for cleaning up output from messy log files
+
+netpacket.net
 '''
 import sys
 

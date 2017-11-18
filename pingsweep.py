@@ -4,6 +4,8 @@ Ping sweep one /24 IPv4 subnet, return responsive and unresponsive IPs
 Useful as a quick check for available IP addresses
 Pauses after first 10 IPs pinged
 Not very fast..
+
+netpacket.net
 '''
 import sys, subprocess, msvcrt
 
