@@ -38,24 +38,22 @@ def microsoft():
     """Outputs data for Microsoft device
     """
     wifi = True
-    output = str(subprocess.check_output('netsh wlan show interfaces'))
-    #With Python 3 the \n is escaped and becomes part of the string, this screws the re.search which should stop at the end of the line - fix encoding!!
-    #print(re.search(r'SSID.+', output).group(0).split())
+    output = subprocess.check_output('netsh wlan show interfaces').decode('ascii')
     try:
         ssid = 'SSID:' + re.search(r'SSID.+', output).group(0).split()[-1]
         bssid = 'BSSID:' + re.search(r'BSSID.+', output).group(0).split()[-1]
         channel = 'Ch:' + re.search(r'Channel.+', output).group(0).split()[-1]
         txrate = 'TX:' + re.search(r'Transmit.+', output).group(0).split()[-1]
         rxrate = 'RX:' + re.search(r'Receive.+', output).group(0).split()[-1]
-        signal = re.search(r'Signal.+', output).group(0).split()[2][:-1]
+        signal = re.search(r'Signal.+', output).group(0).split()[-1][:-1]
         #Hacked above for output from ProXim, need to rework this, its a Python 3 byte encoding thing
-        #signal = re.search(r'Signal.+', output).group(0).split()[-1][:-1]
     except AttributeError:
         print('No data')
         wifi = False
         pass
     clock = time.asctime().split()[3]
     if wifi:
+        pass
         dbm = 'dBm:' + str(int(signal) / 2 - 100)
         print(clock, ssid, bssid, dbm, channel, txrate, rxrate)
     wifi = True
