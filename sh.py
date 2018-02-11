@@ -13,6 +13,11 @@ __author__ = 'Michal Kowalik'
 __version__= '0.1'
 __status__ = 'Prototype'
 
+def end():
+    print('\nUsage sh.py <windows_command> <start_string> <number_of_output_lines>')
+    sys.exit()
+
+if len(sys.argv) == 1: end()
 if len(sys.argv) >= 2:
     runme = sys.argv[1]
     try:
