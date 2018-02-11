@@ -19,7 +19,7 @@ def apple():
     """Outputs data for Apple device
     """
     command = 'exec /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I'
-    output = str(subprocess.check_output(command,shell=True))
+    output = subprocess.check_output(command,shell=True).decode('ascii')
     try:
         ssid = 'SSID:' + re.search(r' SSID.+', output).group(0).split()[-1]
         bssid = 'BSSID:' + re.search(r'BSSID.+', output).group(0).split()[-1]
@@ -46,7 +46,6 @@ def microsoft():
         txrate = 'TX:' + re.search(r'Transmit.+', output).group(0).split()[-1]
         rxrate = 'RX:' + re.search(r'Receive.+', output).group(0).split()[-1]
         signal = re.search(r'Signal.+', output).group(0).split()[-1][:-1]
-        #Hacked above for output from ProXim, need to rework this, its a Python 3 byte encoding thing
     except AttributeError:
         print('No data')
         wifi = False
