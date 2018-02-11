@@ -19,7 +19,7 @@ def apple():
     """Outputs data for Apple device
     """
     command = 'exec /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I'
-    output = subprocess.check_output(command,shell=True)
+    output = str(subprocess.check_output(command,shell=True))
     try:
         ssid = 'SSID:' + re.search(r' SSID.+', output).group(0).split()[-1]
         bssid = 'BSSID:' + re.search(r'BSSID.+', output).group(0).split()[-1]
@@ -28,32 +28,36 @@ def apple():
         signal = 'Signal:' + re.search(r'CtlRSSI.+', output).group(0).split()[-1]
         noise = 'Noise' + re.search(r'agrCtlNoise.+', output).group(0).split()[-1]
     except AttributeError:
-        print 'No data'
+        print('No data')
         pass
     clock = time.asctime().split()[3]
-    print clock, ssid, bssid, channel, txrate, noise, signal
+    print(clock, ssid, bssid, channel, txrate, noise, signal)
     time.sleep(0.5)
 
 def microsoft():
     """Outputs data for Microsoft device
     """
     wifi = True
-    output = subprocess.check_output('netsh wlan show interfaces')
+    output = str(subprocess.check_output('netsh wlan show interfaces'))
+    #With Python 3 the \n is escaped and becomes part of the string, this screws the re.search which should stop at the end of the line - fix encoding!!
+    #print(re.search(r'SSID.+', output).group(0).split())
     try:
         ssid = 'SSID:' + re.search(r'SSID.+', output).group(0).split()[-1]
         bssid = 'BSSID:' + re.search(r'BSSID.+', output).group(0).split()[-1]
         channel = 'Ch:' + re.search(r'Channel.+', output).group(0).split()[-1]
         txrate = 'TX:' + re.search(r'Transmit.+', output).group(0).split()[-1]
         rxrate = 'RX:' + re.search(r'Receive.+', output).group(0).split()[-1]
-        signal = re.search(r'Signal.+', output).group(0).split()[-1][:-1]
+        signal = re.search(r'Signal.+', output).group(0).split()[2][:-1]
+        #Hacked above for output from ProXim, need to rework this, its a Python 3 byte encoding thing
+        #signal = re.search(r'Signal.+', output).group(0).split()[-1][:-1]
     except AttributeError:
-        print 'No data'
+        print('No data')
         wifi = False
         pass
     clock = time.asctime().split()[3]
     if wifi:
         dbm = 'dBm:' + str(int(signal) / 2 - 100)
-        print clock, ssid, bssid, dbm, channel, txrate, rxrate
+        print(clock, ssid, bssid, dbm, channel, txrate, rxrate)
     wifi = True
     time.sleep(0.5)
 
@@ -63,4 +67,4 @@ try:
         if operating_system == 'posix': apple()
         if operating_system == 'nt': microsoft()
 except KeyboardInterrupt:
-    print 'Script stopped.'
+    print('Script stopped.')
