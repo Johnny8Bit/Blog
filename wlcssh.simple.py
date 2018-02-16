@@ -9,7 +9,7 @@ netpacket.net
 import time, paramiko
 wlc_session = paramiko.SSHClient()
 wlc_session.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-wlc_session.connect('192.168.6.21', port='22', username='null', password='null')
+wlc_session.connect('192.168.6.21', port='22', username='sdfhjg', password='null')
 wlc_ssh_class = wlc_session.invoke_shell()
 time.sleep(0.1)
 wlc_ssh_class.send('admin'+'\n')
