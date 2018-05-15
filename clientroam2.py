@@ -10,12 +10,14 @@ Added ICMP check for Microsoft OS.
 
 netpacket.net
 '''
-import subprocess, time, re, os
 
 __author__ = 'Michal Kowalik'
 __credits__= 'Johannes Jobst'
 __version__= '1.0'
 __status__ = 'Prototype'
+__python__ = 'version 3.6.3'
+
+import subprocess, time, re, os
 
 def apple():
     """Outputs data for Apple OS
