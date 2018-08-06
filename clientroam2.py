@@ -71,7 +71,7 @@ def microsoft():
 def ping():
     """Collects IP of host for ICMP test, returns formatted Ping command
     """
-    ping_timeout_ms = '300'
+    ping_timeout_ms = '350'
 
     ping_host = input('\nEnter IP to test [192.0.2.1]: ')
     if ping_host == '': ping_host = '192.0.2.1'
