@@ -1,5 +1,5 @@
 '''
-Displays client Wi-Fi statistics in real-time
+Displays client Wi-Fi statistics in real-time, writes to .xlxs file simultaneously
 
 Useful for testing how a Wi-Fi client roams from AP to AP
 Uses standard OS calls to collect connection statistics from NIC driver
@@ -18,6 +18,7 @@ __status__ = 'Prototype'
 __python__ = 'version 3.6.3'
 
 import subprocess, time, re, os
+from openpyxl import Workbook
 
 def apple():
     """Outputs data for Apple OS
@@ -40,7 +41,7 @@ def apple():
         print(clock, ssid, bssid, channel, txrate, noise, signal)
     time.sleep(0.3)
 
-def microsoft():
+def microsoft(row):
     """Outputs data for Microsoft OS
     """
     wifi = True
@@ -66,12 +67,22 @@ def microsoft():
         #dbm = 'dBm:' + str(int(signal) / 2 - 100)
         print(clock, ssid, bssid, dbm, channel, txrate, rxrate)
         print(ping_output)
+        xls_sheet.cell(row=row, column=1, value=clock)
+        xls_sheet.cell(row=row, column=2, value=ssid)
+        xls_sheet.cell(row=row, column=3, value=bssid)
+        xls_sheet.cell(row=row, column=4, value=dbm)
+        xls_sheet.cell(row=row, column=5, value=channel)
+        xls_sheet.cell(row=row, column=6, value=txrate)
+        xls_sheet.cell(row=row, column=7, value=rxrate)
+        xls_sheet.cell(row=row, column=8, value=ping_output)
+        row += 1
     time.sleep(0.3)
+    return row
 
 def ping():
     """Collects IP of host for ICMP test, returns formatted Ping command
     """
-    ping_host = ''
+    ping_host = '1.1.1.1'
     ping_timeout_ms = '350'
 
     if ping_host == '':
@@ -81,12 +92,22 @@ def ping():
     if operating_system == 'nt': ping_cmd = ('ping -w ' + ping_timeout_ms + ' -n 1 ' + ping_host)
     return(ping_cmd)
 
+
 if __name__ == '__main__':
+    xls = Workbook()
+    xls_sheet = xls.active
+    xls_filename = 'roam_export.xlsx'
+    row = 1
     operating_system = os.name
     ping_command = ping()
     try:
         while True:
-            if operating_system == 'posix': apple()
-            if operating_system == 'nt': microsoft()
+            if operating_system == 'posix': row = apple(row)
+            if operating_system == 'nt': row = microsoft(row)
     except KeyboardInterrupt:
+        try:
+            xls.save(xls_filename)
+            print('Saved', xls_filename)
+        except PermissionError:
+            print('File cannot be saved, exiting.')
         print('Script stopped.')
