@@ -6,7 +6,7 @@ Uses standard OS calls to collect connection statistics from NIC driver
 Works on Microsoft and Apple platforms
 Use keyboard break to stop
 
-Added ICMP check for Microsoft OS.
+Functionality on Aple differs from MSFT for the time being.
 
 netpacket.net
 '''
@@ -15,7 +15,7 @@ __author__ = 'Michal Kowalik'
 __credits__= 'Johannes Jobst'
 __version__= '1.1'
 __status__ = 'Prototype'
-__python__ = 'version 3.6.3'
+__python__ = '3.7'
 
 import subprocess, time, re, os
 from openpyxl import Workbook
