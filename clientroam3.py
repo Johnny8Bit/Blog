@@ -6,7 +6,7 @@ Uses standard OS calls to collect connection statistics from NIC driver
 Works on Microsoft and Apple platforms
 Use keyboard break to stop
 
-Functionality on Aple differs from MSFT for the time being.
+Functionality on Apple differs from MSFT for the time being.
 
 netpacket.net
 '''
