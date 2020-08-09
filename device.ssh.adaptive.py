@@ -1,9 +1,9 @@
 import paramiko, sys, socket, time
 
-device_ip = '192.168.1.7'
+device_ip = '192.168.1.1'
 login_username = 'admin'
-login_password = 'C15coecats'
-enable_password = 'C15coecats' #If required
+login_password = 'password'
+enable_password = 'password' #If required
 
 receive_buffer = 256 #No need to change this
 wait_time = 0.2 #Increase this for slow devices
