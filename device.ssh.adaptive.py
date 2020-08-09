@@ -8,7 +8,7 @@ enable_password = 'password' #If required
 receive_buffer = 256 #No need to change this
 wait_time = 0.2 #Increase this for slow devices
 
-my_command = 'ifconfig'
+my_command = 'show ip interface brief'
 
 def do_login():
     device_session = paramiko.SSHClient()
