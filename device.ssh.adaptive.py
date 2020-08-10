@@ -1,6 +1,6 @@
 '''
 SSH script for interacting with network devices
-Logs in to a devcie and displays the output of a given command
+Logs in to a device and displays the output of a given command
 do_command() function can be run repeatedly if required
 
 Tested against Cisco Catalyst 2960, Cisco Catalyst 9800, Cisco Virtual WLC (AireOS), Raspberry Pi 4B
