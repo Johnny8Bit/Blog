@@ -1,3 +1,3 @@
-### General dumping ground for standalone public scripts
+### Demo scripts for netpacket.net blog
 
 
